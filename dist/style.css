@@ -47,7 +47,6 @@ html {
     display: flex;
     flex-direction: column;
     margin-bottom: 10vh;
-    /* background-image: url(../src/images/lists.jpg); */
 }
 .card {
     border: solid var(--hover) 1px;
