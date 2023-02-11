@@ -15,7 +15,7 @@
 
 html {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     opacity: 0.9;
     background-image: radial-gradient(circle at center center, #3755b8, #4fc8c8),
         repeating-radial-gradient(
@@ -51,7 +51,6 @@ html {
 .card {
     border: solid var(--hover) 1px;
     padding: 1vw;
-    margin: 3vw;
     background-color: #93cdda;
 }
 .card:nth-child(2n + 1) {
@@ -61,6 +60,9 @@ html {
     display: flex;
     justify-content: space-between;
 }
+.card div:nth-child(4) {
+    justify-content: space-evenly;
+}
 .title {
     font-weight: bolder;
     padding-bottom: 2vh;
@@ -69,30 +71,33 @@ html {
     padding-bottom: 3vw;
 }
 .high {
-    border-right: 5vh solid #ff595e;
+    border-right: 3vh solid #ff595e;
     border-radius: 10px;
 }
 .medium {
-    border-right: 5vh solid #fcf6bd;
+    border-right: 3vh solid #fcf6bd;
     border-radius: 10px;
 }
 .low {
-    border-right: 5vh solid #52b788;
+    border-right: 3vh solid #52b788;
     border-radius: 10px;
 }
 .card div button:hover {
     background-color: var(--hover);
     color: red;
 }
-.trash,
-.edit,
-.done {
+.btnCard {
     border: none;
     padding: 0;
     font-size: 4vw;
     background: transparent;
     cursor: pointer;
     color: #cd4932;
+    width: 5vw;
+}
+.btnElement {
+    border: none;
+    background: transparent;
 }
 .strike {
     text-decoration-line: line-through;
@@ -108,17 +113,22 @@ html {
     bottom: 20vh;
     left: 7vw;
 }
-#btnAdd,
-#btnEdit {
-    background-color: var(--btnBGC);
-    width: 100%;
+.btnNav {
+    width: 35%;
     color: whitesmoke;
     font-size: 3vh;
 }
-#btnAdd:hover {
-    background-color: var(--hover);
-    color: red;
+.btnForm {
+    background-color: var(--btnBGC);
+    width: 50%;
+    color: whitesmoke;
+    font-size: 3vh;
 }
+.btnNav:hover,
+.btnForm:hover {
+    background-color: var(--hover);
+}
+
 .close {
     float: right;
     transform: translateX(30%);
@@ -134,6 +144,7 @@ html {
 .wide {
     width: 100%;
     padding: 1vw;
+    display: block;
 }
 footer {
     position: fixed;
@@ -149,14 +160,15 @@ ul {
     justify-content: space-evenly;
 }
 li {
-    padding: 2vw;
-    font-size: 9vw;
+    /* padding: 2vw; */
+    /* font-size: 9vw; */
     text-align: center;
 }
 li:hover {
     background-color: #cd4932;
 }
-#sortDiv {
+#sortDiv,
+#projectListDiv {
     background-color: rgb(110, 141, 182);
     padding: 3vw;
 }
@@ -169,7 +181,13 @@ li:hover {
     padding-right: 10vw;
 }
 
+.hidden {
+    display: none;
+}
 @media only screen and (min-width: 600px) {
+    html {
+        font-size: 2vw;
+    }
     #content {
         grid-template-columns: 1fr 10fr;
         grid-template-areas:
@@ -183,15 +201,13 @@ li:hover {
     #main {
         display: grid;
         grid-area: main;
-        margin-bottom: 0;
+        /* margin-bottom: 0; */
     }
     #formAdd {
         width: 50vw;
         left: 30vw;
     }
-    .trash,
-    .edit,
-    .done {
+    .btnCard {
         font-size: 3vw;
     }
     footer {
@@ -207,7 +223,11 @@ li:hover {
         flex-direction: column;
     }
     li {
-        font-size: 5vw;
+        /* font-size: 12vw; */
+        padding: 2vw;
+    }
+    .btnNav {
+        width: 8vw;
     }
     #sortDiv {
         position: absolute;
@@ -225,17 +245,15 @@ li:hover {
         justify-content: center;
     }
     #content {
-        width: 50vw;
+        width: 70vw;
     }
-    .trash,
-    .edit,
-    .done {
+    .btnCard {
         font-size: 2vw;
     }
     .card {
         margin: 1vw;
     }
     footer {
-        width: 8vw;
+        height: 4vw;
     }
 }
