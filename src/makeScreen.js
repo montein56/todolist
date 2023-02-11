@@ -1,12 +1,12 @@
 /* eslint-disable no-plusplus */
 // import { addMinutes,addHours,addDays,addMonths,addYears,format } from 'date-fns'
 
-// design SCREEN (Mobile First) TO DISPLAY TASKS USING A CARD FOR EACH TASK
-
-import taskDelete from './deleteTask'
-import taskEdit from './editTask'
-import branchToForm from './branchAddEdit'
+import taskDetail from './cardToggleDetail'
+import taskDelete from './taskDelete'
 import taskDone from './taskDone'
+import taskEdit from './taskEdit'
+
+// MOBILE FIRST DESIGN: DISPLAY TASKS USING A CARD FOR EACH TASK
 
 const content = document.getElementById('content')
 function makeHeader() {
@@ -18,8 +18,7 @@ function makeHeader() {
     content.appendChild(header)
 }
 
-function createCard(main) {
-    const collection = JSON.parse(window.localStorage.getItem('ToDoList'))
+function createCard(collection, main) {
     let i = collection.length
     for (i = collection.length - 1; i >= 0; i--) {
         const card = document.createElement('card') // parent card element, one per task
@@ -55,43 +54,49 @@ function createCard(main) {
         line3.appendChild(description)
 
         const btnDone = document.createElement('button')
-        btnDone.classList.add('done')
-        if (collection[i].completed === true) {
-            btnDone.innerHTML = `<i class="fa fa-check"></i>`
-        } else {
-            btnDone.innerHTML = `<i class="fa fa-window-close-o"></i>`
-        }
+        btnDone.classList.add('btnElement')
         btnDone.addEventListener('click', taskDone)
+        if (collection[i].completed === true) {
+            btnDone.innerHTML = `<img src = 'images/check.png' class = 'btnCard done'>`
+        } else {
+            btnDone.innerHTML = `<img src = 'images/pending.png' class = 'btnCard done'>`
+        }
         line4.appendChild(btnDone)
 
+        const btnDetail = document.createElement('button')
+        btnDetail.addEventListener('click', taskDetail)
+        btnDetail.classList.add('btnElement')
+        btnDetail.innerHTML = `<img src = 'images/detail.png' class = 'btnCard detail'>`
+        line4.appendChild(btnDetail)
+
         const btnEdit = document.createElement('button')
-        btnEdit.classList.add('edit')
-        btnEdit.innerHTML = `<i class="fa fa-edit"></i>`
         btnEdit.addEventListener('click', taskEdit)
+        btnEdit.classList.add('btnElement')
+        btnEdit.innerHTML = `<img src = 'images/edit.png' class = 'btnCard edit'>`
         line4.appendChild(btnEdit)
 
-        const trash = document.createElement('button')
-        trash.classList.add('trash')
-        trash.innerHTML = `<i class="fa fa-trash"></i>`
-        trash.addEventListener('click', taskDelete)
-        line4.appendChild(trash)
+        const btnDelete = document.createElement('button')
+        btnDelete.addEventListener('click', taskDelete)
+        btnDelete.classList.add('btnElement')
+        btnDelete.innerHTML = `<img src = 'images/delete.png' class = 'btnCard delete'>`
+        line4.appendChild(btnDelete)
 
-        if (collection[i].priority === 'High') {
+        if (collection[i].priority === 3) {
             card.classList.add('high')
         }
-        if (collection[i].priority === 'Medium') {
+        if (collection[i].priority === 2) {
             card.classList.add('medium')
         }
-        if (collection[i].priority === 'Low') {
+        if (collection[i].priority === 1) {
             card.classList.add('low')
         }
-
         if (collection[i].completed === true) {
-            card.style.borderRight = 'none'
-            btnDone.style.color = 'green'
             card.style.borderRight = 'none'
             card.classList.add('strike')
         }
+        line2.style.display = 'none'
+        line3.style.display = 'none'
+
         main.appendChild(card)
     }
 }
@@ -100,29 +105,30 @@ function makeMain() {
     const main = document.createElement('div')
     main.id = 'main'
     content.appendChild(main)
-    createCard(main)
+    const collection = JSON.parse(window.localStorage.getItem('ToDoList'))
+
+    createCard(collection, main)
 }
 
-// MAKE FOOTER TO HOLD THE NAVBAR
+// FOOTER TO HOLD THE NAVBAR
 function makeFooter() {
     const footer = document.createElement('footer')
-    // MAKE NAVBAR TO CONTAIN MENU
+    // NAVBAR TO CONTAIN MENU
     const navbar = document.createElement('navbar')
     navbar.id = 'navbar'
-    // CREATE MENU ITEMS TO GO INTO NAVBAR
+    // MENU ITEMS TO GO INTO NAVBAR
     const menuList = [
-        `<i class="fa fa-home"></i>`,
-        `<i class="fa fa-plus-square"></i>`,
-        `<i class="fa fa-calendar"></i>`,
-        `<i class="fa fa-sort"></i>`,
+        `<img src = 'images/home.png'  class = 'home btnNav'>`,
+        `<img src = 'images/plus.png'  class = 'plus btnNav'>`,
+        `<img src = 'images/project.png'  class = 'projectList btnNav'>`,
+        `<img src = 'images/sort.png'  class = 'sort btnNav'>`,
     ]
     const ul = document.createElement('ul')
     let i = 0
     for (i = 0; i <= menuList.length - 1; i++) {
         const li = document.createElement('li')
-        li.innerHTML = `<a href="#">${menuList[i]}</a>`
+        li.innerHTML = `${menuList[i]}`
         li.classList.add('menuItem')
-        li.addEventListener('click', branchToForm)
         ul.appendChild(li)
     }
     navbar.appendChild(ul)
@@ -131,10 +137,10 @@ function makeFooter() {
 }
 
 function makeScreen() {
-    //  3 SECTIONS, Header, Main and Footer
     makeHeader()
     makeMain()
     makeFooter()
 }
 
 export default makeScreen
+export { createCard }

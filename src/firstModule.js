@@ -1,8 +1,11 @@
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
+
 // CHECK IF TODOLIST EXISTS IN LOCAL STORAGE, IF NOT CREATE A DUMMY TASK THERE
+// import { applyCardBtnListeners, applyNavListeners } from './listeners'
+import { applyNavListeners } from './listenerBranch'
 import makeScreen from './makeScreen'
-import { taskFactory } from './newTask'
+import { taskFactory } from './taskNewEditSave'
 
 function initLocalStorage() {
     const ToDoList = localStorage.getItem('ToDoList')
@@ -24,6 +27,7 @@ function initLocalStorage() {
         localStorage.setItem('ToDoList', JSON.stringify(listFromLS))
     }
     makeScreen()
+    applyNavListeners()
 }
 export default initLocalStorage
 

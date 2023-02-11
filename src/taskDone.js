@@ -2,14 +2,6 @@
 
 const collection = JSON.parse(window.localStorage.getItem('ToDoList'))
 
-function strikeTask(index) {
-    collection[index].completed = true
-    localStorage.setItem('ToDoList', JSON.stringify(collection))
-}
-function unStrikeTask(index) {
-    collection[index].completed = false
-    localStorage.setItem('ToDoList', JSON.stringify(collection))
-}
 function taskDone(e) {
     const taskTitleDone =
         e.target.parentElement.parentElement.parentElement.childNodes[0]
@@ -18,10 +10,13 @@ function taskDone(e) {
         (object) => object.title === taskTitleDone
     )
     if (collection[indexOfDoneTask].completed === false) {
-        strikeTask(indexOfDoneTask)
+        collection[indexOfDoneTask].completed = true
+        // strikeTask(indexOfDoneTask)
     } else {
-        unStrikeTask(indexOfDoneTask)
+        collection[indexOfDoneTask].completed = false
+        // unStrikeTask(indexOfDoneTask)
     }
+    localStorage.setItem('ToDoList', JSON.stringify(collection))
     window.location.reload()
 }
 export default taskDone
