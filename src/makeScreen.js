@@ -131,7 +131,11 @@ function makeFooter() {
         li.classList.add('menuItem')
         ul.appendChild(li)
     }
+    const navSubMenu = document.createElement('div')
+    navSubMenu.id = 'navSubMenu'
+
     navbar.appendChild(ul)
+    navbar.appendChild(navSubMenu)
     footer.appendChild(navbar)
     content.appendChild(footer)
 }

@@ -59,6 +59,7 @@ html {
 .card div {
     display: flex;
     justify-content: space-between;
+    font-size: 3.5vw;
 }
 .card div:nth-child(4) {
     justify-content: space-evenly;
@@ -71,16 +72,23 @@ html {
     padding-bottom: 3vw;
 }
 .high {
-    border-right: 3vh solid #ff595e;
-    border-radius: 10px;
+    border-right: 7vw solid #ff595e;
+    border-top-right-radius: 8%;
+    border-bottom-right-radius: 8%;
+
+    /* border-radius: 8%; */
 }
 .medium {
-    border-right: 3vh solid #fcf6bd;
-    border-radius: 10px;
+    border-right: 7vw solid #fcf6bd;
+    border-top-right-radius: 8%;
+    border-bottom-right-radius: 8%;
+    /* border-radius: 8%; */
 }
 .low {
-    border-right: 3vh solid #52b788;
-    border-radius: 10px;
+    border-right: 7vw solid #52b788;
+    border-top-right-radius: 8%;
+    border-bottom-right-radius: 8%;
+    /* border-radius: 8%; */
 }
 .card div button:hover {
     background-color: var(--hover);
@@ -107,11 +115,12 @@ html {
 #formAdd {
     padding: 2vw;
     background-color: aliceblue;
-    border: double 2vw pink;
+    /* border: double 2vw pink; */
     width: 90vw;
     position: fixed;
     bottom: 20vh;
     left: 7vw;
+    font-size: 1.5vw;
 }
 .btnNav {
     width: 35%;
@@ -122,11 +131,14 @@ html {
     background-color: var(--btnBGC);
     width: 50%;
     color: whitesmoke;
-    font-size: 3vh;
+    font-size: 2vh;
 }
 .btnNav:hover,
-.btnForm:hover {
+.btnForm:hover,
+#navSubMenu a:hover {
     background-color: var(--hover);
+    color: whitesmoke;
+    cursor: pointer;
 }
 
 .close {
@@ -158,38 +170,33 @@ ul {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    padding-top: 2vw;
 }
 li {
-    /* padding: 2vw; */
-    /* font-size: 9vw; */
     text-align: center;
 }
 li:hover {
     background-color: #cd4932;
 }
-#sortDiv,
-#projectListDiv {
-    background-color: rgb(110, 141, 182);
-    padding: 3vw;
-}
-#sortDiv a {
+#navSubMenu {
+    background-color: #a5dbe6;
+    padding: 2vw 0;
     display: flex;
-    justify-content: right;
-    color: rgb(117, 0, 128);
+    justify-content: space-between;
+    overflow: scroll;
+}
+#navSubMenu a {
+    padding-right: 2vw;
     text-align: center;
-    cursor: pointer;
-    padding-right: 10vw;
+    font-size: 3vw;
 }
 
-.hidden {
-    display: none;
-}
 @media only screen and (min-width: 600px) {
     html {
         font-size: 2vw;
     }
     #content {
-        grid-template-columns: 1fr 10fr;
+        grid-template-columns: 8fr 55fr;
         grid-template-areas:
             'header header'
             'footer main';
@@ -199,61 +206,87 @@ li:hover {
         grid-area: header;
     }
     #main {
-        display: grid;
-        grid-area: main;
-        /* margin-bottom: 0; */
+        /* display: grid; */
+        grid-area: 'main';
+    }
+    .btnCard {
+        width: 3vw;
+    }
+    .card div {
+        font-size: 2vw;
     }
     #formAdd {
         width: 50vw;
         left: 30vw;
     }
-    .btnCard {
-        font-size: 3vw;
-    }
     footer {
         position: relative;
         display: grid;
         grid-area: footer;
-        width: 12.5vw;
+        width: 8vw;
         margin: 0;
         padding: 0;
     }
+    #navSubMenu {
+        display: block;
+        padding-left: 1vw;
+        text-align: center;
+        overflow: unset;
+    }
+    #navSubMenu a {
+        font-size: 2vw;
+        padding-top: 2vw;
+    }
     ul {
-        display: flex;
         flex-direction: column;
+        justify-content: flex-start;
     }
     li {
-        /* font-size: 12vw; */
         padding: 2vw;
     }
     .btnNav {
-        width: 8vw;
-    }
-    #sortDiv {
-        position: absolute;
-        display: block;
-    }
-    #sortDiv a {
-        position: relative;
-        left: 5vw;
-        padding-right: 3vw;
+        width: 3vw;
     }
 }
 @media only screen and (min-width: 1025px) {
     html {
+    }
+    body {
         display: flex;
         justify-content: center;
     }
     #content {
         width: 70vw;
     }
-    .btnCard {
-        font-size: 2vw;
+
+    #main {
     }
-    .card {
-        margin: 1vw;
+    .card div {
+        font-size: 1vw;
     }
     footer {
-        height: 4vw;
+    }
+    ul {
+        justify-content: space-evenly;
+    }
+    li {
+        padding: 0;
+    }
+    #navSubMenu {
+        padding: 0;
+        overflow: visible;
+        font-size: 1vw;
+    }
+    #navSubMenu a {
+        font-size: 1vw;
+    }
+    .btnCard {
+        width: 2vw;
+    }
+    .btnNav {
+        width: 3vw;
+        padding: 2vh 0;
+    }
+    .card {
     }
 }

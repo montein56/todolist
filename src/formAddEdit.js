@@ -37,10 +37,10 @@ function makeForms(editIndex) {
         field.classList.add('wide')
         field.id = fields[i]
         group.appendChild(field)
-        group.appendChild(br.cloneNode())
+        // group.appendChild(br.cloneNode())
     }
     group.appendChild(deadline)
-    group.appendChild(br.cloneNode())
+    // group.appendChild(br.cloneNode())
 
     const priority = document.createElement('p')
     priority.id = 'priority'
@@ -61,12 +61,13 @@ function makeForms(editIndex) {
     }
     priority.appendChild(labelPriority).appendChild(select)
     group.appendChild(priority)
-    group.appendChild(br.cloneNode())
+    // group.appendChild(br.cloneNode())
 
     const project = document.createElement('input')
     project.setAttribute('list', 'projects')
     project.setAttribute('name', 'project')
     project.id = 'project'
+    project.value = 'Unknown'
     project.classList.add('wide')
 
     const labelProject = document.createElement('label')
@@ -92,7 +93,7 @@ function makeForms(editIndex) {
     }
     project.appendChild(datalistProjects)
     group.appendChild(project)
-    group.appendChild(br.cloneNode())
+    // group.appendChild(br.cloneNode())
 
     const btnCancel = document.createElement('button')
     btnCancel.setAttribute('type', 'reset')
