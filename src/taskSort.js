@@ -1,48 +1,45 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-undef */
 /* eslint-disable no-alert */
 
-// SORT BUTTON IN NAVBAR: SORT BY 5 THINGS
+import createCard from './makeScreen'
+
+// SORT BUTTON IN NAVBAR: SORT BY 4 THINGS
 function sortBy(e) {
-    const sortField = e.target.id
+    const main = document.getElementById('main')
+    main.innerHTML = ''
+    const sortField = e.target.innerText
     const collection = JSON.parse(window.localStorage.getItem('ToDoList'))
     if (sortField.includes('Date')) {
         collection.sort((a, b) => (a.deadline > b.deadline ? 1 : -1))
     } else if (sortField.includes('Title')) {
         collection.sort((a, b) => (a.title < b.title ? 1 : -1))
-        // } else if (sortField.includes('Project')) {
-        //     collection.sort((a, b) => (a.project < b.project ? 1 : -1))
     } else if (sortField.includes('Priority')) {
         collection.sort((a, b) => (a.priority > b.priority ? 1 : -1))
     } else if (sortField.includes('Done')) {
         collection.sort((a, b) => (a.completed > b.completed ? 1 : -1))
     }
     localStorage.setItem('ToDoList', JSON.stringify(collection))
-    window.location.reload()
+    const navSubMenu = document.querySelector('#navSubMenu')
+    navSubMenu.style.visibility = 'hidden'
+    subMenuUL.innerHTML = ''
+    createCard()
 }
 
 function taskSort() {
-    const navSubMenu = document.getElementById('navSubMenu')
-    navSubMenu.innerHTML = ''
-    const br = document.createElement('br')
-
-    const sortItems = [
-        '<b>SORT BY:</b>',
-        'Title',
-        'Date',
-        // 'Project',
-        'Priority',
-        'Done',
-    ]
+    const navSubMenuPara = document.querySelector('#subMenuTitle')
+    navSubMenuPara.innerText = 'SORT BY:'
+    const subMenuUL = document.querySelector('#subMenuUL')
+    const sortList = ['Title', 'Date', 'Priority', 'Done']
     let i = 0
-    // eslint-disable-next-line no-plusplus
-    for (i = 0; i <= sortItems.length - 1; i++) {
-        const field = document.createElement('a')
-        field.innerHTML = `${sortItems[i]}`
-        field.id = `${sortItems[i]}`
-        field.addEventListener('click', sortBy)
-        navSubMenu.appendChild(field)
-        navSubMenu.appendChild(br.cloneNode())
-        navSubMenu.appendChild(br.cloneNode())
+    for (i = 0; i <= sortList.length - 1; i++) {
+        const li = document.createElement('li')
+        li.classList.add('options')
+        li.innerText = sortList[i]
+        li.addEventListener('click', sortBy)
+        subMenuUL.appendChild(li)
     }
-    // sortBy()
+    const navSubMenu = document.querySelector('#navSubMenu')
+    navSubMenu.style.visibility = 'visible'
 }
-export default taskSort
+export { taskSort, sortBy }

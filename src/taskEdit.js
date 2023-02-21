@@ -4,14 +4,6 @@ import makeForms from './formAddEdit'
 
 // GET LS INDEX NUMBER OF TASK TO EDIT
 function taskEdit(e) {
-    const prjctList = document.getElementById('projectListDiv')
-    if (prjctList) {
-        prjctList.innerHTML = ''
-    }
-    const sortDiv = document.getElementById('sortDiv')
-    if (sortDiv) {
-        sortDiv.innerHTML = ''
-    }
     const collection = JSON.parse(window.localStorage.getItem('ToDoList'))
     const targetID =
         e.target.parentElement.parentElement.parentElement.childNodes[0]

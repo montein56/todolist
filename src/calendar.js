@@ -1,33 +1,40 @@
-/* eslint-disable no-console */
-// eslint-disable-next-line no-unused-vars, import/no-extraneous-dependencies
-import { addMinutes,addHours,addDays,addMonths,addYears,format } from 'date-fns'
+/* eslint-disable no-plusplus */
+import { addDays, format } from 'date-fns'
 
-function makeCalendar(){
+function makeCalendar() {
+    // MAKE CALENDAR BAR BELOW HEADER
+    // const header = document.getElementById('header')
+    // const calendarBar = document.getElementById('calendar')
+    // header.insertAdjacentElement('afterend', calendarBar)
+    // const content = document.getElementById('content')
+    // content.style.gridTemplateAreas =
+    //     '"header header" "footer calendarBar" "footer main"'
 
-    let a = new Date();
-    let b = new Date("2023-01-22");
-console.log(b - a); // this works
-localStorage.a = a;
-localStorage.b = b;
-a = Date.parse(localStorage.a); // parse to date object
-b = Date.parse(localStorage.b);
-console.log(b - a); // now, this will work
-    
-    // function myFunction(item){ // FOR EACH TODO TASK CREATE A CARD
-    //     const card = document.createElement("card"); // parent card element, one per book
-    //     // card.setAttribute("id", item.title);
-    //     card.classList.add("card")
+    const date = new Date()
+    const cards = document.getElementsByClassName('cardDay')
+    let x = 0
+    for (x = 0; x <= cards.length - 1; x++) {
+        const paraDay = document.createElement('p')
+        paraDay.classList.add('paraDay')
+        const tasksToday = document.createElement('p')
+        tasksToday.classList.add('tasksToday')
+        const dateToUse = addDays(date, x)
+        cards[x].innerText = format(dateToUse, 'EEE')
+        cards[x].appendChild(paraDay)
+        cards[x].appendChild(tasksToday)
+        paraDay.innerText = format(dateToUse, 'dd MMM')
 
-    //     const date = new Date();
-    //     const oneWeekLater = addDays(date, 7);
-    //     card.innerHTML = format(oneWeekLater, 'EEE, dd MMM yyyy')
-    //     card.innerHTML = item.deadline;
-
-    //     const content = document.getElementById('content');
-    //     content.appendChild(card);
-    // } 
-    // const collection = JSON.parse(window.localStorage.getItem('ToDoList'));   
-    // collection.forEach(myFunction);
+        const dateForTasks = format(addDays(date, x), 'yyyy-MM-dd')
+        const collection = JSON.parse(window.localStorage.getItem('ToDoList'))
+        const arrTasksToday = collection.filter(
+            (item) => item.deadline === dateForTasks
+        )
+        let i = 0
+        for (i = 0; i <= arrTasksToday.length - 1; i++) {
+            tasksToday.innerHTML += `<br>${i + 1}. ${
+                arrTasksToday[i].title
+            }<br>`
+        }
+    }
 }
-
-export default makeCalendar;
+export default makeCalendar

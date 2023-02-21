@@ -1,24 +1,18 @@
 /* eslint-disable no-plusplus */
 // import { addMinutes,addHours,addDays,addMonths,addYears,format } from 'date-fns'
 
+import { parseISO, format } from 'date-fns'
+// v2.0.0 onward
+// import differenceInCalendarISOYears from 'date-fns/differenceInCalendarISOYears'
 import taskDetail from './cardToggleDetail'
 import taskDelete from './taskDelete'
 import taskDone from './taskDone'
 import taskEdit from './taskEdit'
 
-// MOBILE FIRST DESIGN: DISPLAY TASKS USING A CARD FOR EACH TASK
-
-const content = document.getElementById('content')
-function makeHeader() {
-    const header = document.createElement('div')
-    header.id = 'header'
-    const h1 = document.createElement('h1')
-    h1.innerHTML = 'THINGS TO DO'
-    header.appendChild(h1)
-    content.appendChild(header)
-}
-
-function createCard(collection, main) {
+function createCard(newCollection) {
+    const collection =
+        newCollection || JSON.parse(window.localStorage.getItem('ToDoList'))
+    const main = document.getElementById('main')
     let i = collection.length
     for (i = collection.length - 1; i >= 0; i--) {
         const card = document.createElement('card') // parent card element, one per task
@@ -40,7 +34,10 @@ function createCard(collection, main) {
 
         const deadline = document.createElement('deadline')
         deadline.classList.add('deadline')
-        deadline.innerHTML = `<b>Due</b>: ${collection[i].deadline}`
+        const taskDate = `${collection[i].deadline}`
+        if (taskDate) {
+            deadline.innerHTML = format(parseISO(taskDate), 'EEE, dd MMM yyyy')
+        }
         line1.appendChild(deadline)
 
         const project = document.createElement('project')
@@ -91,7 +88,7 @@ function createCard(collection, main) {
             card.classList.add('low')
         }
         if (collection[i].completed === true) {
-            card.style.borderRight = 'none'
+            card.style.borderLeft = 'none'
             card.classList.add('strike')
         }
         line2.style.display = 'none'
@@ -101,50 +98,4 @@ function createCard(collection, main) {
     }
 }
 
-function makeMain() {
-    const main = document.createElement('div')
-    main.id = 'main'
-    content.appendChild(main)
-    const collection = JSON.parse(window.localStorage.getItem('ToDoList'))
-
-    createCard(collection, main)
-}
-
-// FOOTER TO HOLD THE NAVBAR
-function makeFooter() {
-    const footer = document.createElement('footer')
-    // NAVBAR TO CONTAIN MENU
-    const navbar = document.createElement('navbar')
-    navbar.id = 'navbar'
-    // MENU ITEMS TO GO INTO NAVBAR
-    const menuList = [
-        `<img src = 'images/home.png'  class = 'home btnNav'>`,
-        `<img src = 'images/plus.png'  class = 'plus btnNav'>`,
-        `<img src = 'images/project.png'  class = 'projectList btnNav'>`,
-        `<img src = 'images/sort.png'  class = 'sort btnNav'>`,
-    ]
-    const ul = document.createElement('ul')
-    let i = 0
-    for (i = 0; i <= menuList.length - 1; i++) {
-        const li = document.createElement('li')
-        li.innerHTML = `${menuList[i]}`
-        li.classList.add('menuItem')
-        ul.appendChild(li)
-    }
-    const navSubMenu = document.createElement('div')
-    navSubMenu.id = 'navSubMenu'
-
-    navbar.appendChild(ul)
-    navbar.appendChild(navSubMenu)
-    footer.appendChild(navbar)
-    content.appendChild(footer)
-}
-
-function makeScreen() {
-    makeHeader()
-    makeMain()
-    makeFooter()
-}
-
-export default makeScreen
-export { createCard }
+export default createCard

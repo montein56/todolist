@@ -1,10 +1,12 @@
-/* eslint-disable no-console */
 /* eslint-disable no-alert */
-
 // CHECK IF TODOLIST EXISTS IN LOCAL STORAGE, IF NOT CREATE A DUMMY TASK THERE
-// import { applyCardBtnListeners, applyNavListeners } from './listeners'
-import { applyNavListeners } from './listenerBranch'
-import makeScreen from './makeScreen'
+import makeCalendar from './calendar'
+import {
+    applyCalendarListeners,
+    applyCardBtnListeners,
+    applyNavListeners,
+} from './listenerBranch'
+import createCard from './makeScreen'
 import { taskFactory } from './taskNewEditSave'
 
 function initLocalStorage() {
@@ -17,7 +19,7 @@ function initLocalStorage() {
         const sampleTask = taskFactory(
             'BUY MILK',
             'From here, we can easily conclude that it’s best to go for three sizes: desktop, tablet, and phone.',
-            'High',
+            3,
             'Groceries',
             new Date(),
             false
@@ -26,12 +28,10 @@ function initLocalStorage() {
         listFromLS.push(sampleTask)
         localStorage.setItem('ToDoList', JSON.stringify(listFromLS))
     }
-    makeScreen()
+    createCard()
+    makeCalendar()
     applyNavListeners()
+    applyCalendarListeners()
+    applyCardBtnListeners()
 }
 export default initLocalStorage
-
-// var date = window.localStorage.getItem('date')
-// // Initialize the date object as a date object again here
-// date = new Date(date)
-// date.setDate(date.getDate() + 7)

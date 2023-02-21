@@ -1,16 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script src="https://kit.fontawesome.com/3c99f8c525.js" crossorigin="anonymous"></script> -->
-    <title>TO DO LISTS</title>
-</head>
-<body>
-    <div id="content">
-    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TO DO LISTS</title>
+    </head>
+    <body>
+        <!-- <div id="content"> -->
+            <!-- <span id="top"> -->
+        <h1 id="header">THINGS TO DO</h1>
+        <ul id="calendar">
+                    <li class="cardDay"></li>
+                    <li class="cardDay"></li>
+                    <li class="cardDay"></li>
+                    <li class="cardDay"></li>
+                    <li class="cardDay"></li>
+                    <li class="cardDay"></li>
+                    <li class="cardDay"></li>
+                </ul>
+            <!-- </span> -->
+        <div id="main">
 
-    <script defer src="main.js"></script>
-</body>
+        </div>
+        <!-- </div> -->
+        <div id="footer">
+                <navbar id="navbar">
+                    <div id="navSubMenu">
+                        <p id="subMenuTitle"></p>
+                        <ul id="subMenuUL">
+                        </ul>
+                        
+                    </div>
+                    <ul>
+                        <li>
+                            <img
+                                src="images/home.png"
+                                class="menuItem home btnNav"
+                                alt="home icon"
+                            />
+                        </li>
+                        <li>
+                            <img
+                                src="images/plus.png"
+                                class="menuItem plus btnNav"
+                                alt="add icon"
+                            />
+                        </li>
+                        <li>
+                            <img
+                                src="images/project.png"
+                                class="menuItem projectList btnNav"
+                                alt="projects icon"
+                            />
+                        </li>
+                        <li>
+                            <img
+                                src="images/sort.png"
+                                class="menuItem sort btnNav"
+                                alt="sort icon"
+                            />
+                        </li>
+                    </ul>
+                </navbar>
+        </div>
+        
+        <form id="formAdd">
+            <a class="close" href="javascript:window.location.reload()">&#10060</a>
+            <fieldset>
+                <input type="text" name="Task" class="wide" id="title" placeholder="title" required>
+                <input type="text" name="Task" class="wide" id="description" placeholder="description">
+                <legend>ADD / EDIT FIELDS AS REQUIRED</legend>
+                <input type="date" name="Task" class="wide" id="deadline" placeholder="enter a date">
+                <p id="priority">
+                    <label for="priority">Choose yopur priority
+                    <select name="priority" id="priorityLevel" class="wide">
+                        <option value=Low>LOW</option>
+                        <option value=Medium>MEDIUM</option>
+                 <option value=High>HIGH</option>
+                    </select>
+        </label>
+                </p>
+                <label for="project">Choose / Enter Project Name</label>
+                <input list="projects" name="project" id="project" placeholder="Enter new or select from List" class="wide">
+                <datalist id="projects">
+                </datalist>
+                <span>
+                    <button type="reset" class="btnForm" id="btnCancel">CANCEL</button>
+                    <button type="submit" class="btnForm" id="btnSave">SAVE</button>
+                </span>
+
+            </fieldset>
+        </form>
+
+        <script defer src="main.js"></script>
+    </body>
 </html>

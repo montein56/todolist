@@ -1,22 +1,36 @@
 /* eslint-disable no-console */
 
-const collection = JSON.parse(window.localStorage.getItem('ToDoList'))
-
 function taskDone(e) {
+    const newCollection = JSON.parse(window.localStorage.getItem('ToDoList'))
     const taskTitleDone =
         e.target.parentElement.parentElement.parentElement.childNodes[0]
             .childNodes[0].firstChild.data
-    const indexOfDoneTask = collection.findIndex(
+    const test =
+        e.target.parentElement.parentElement.parentElement.childNodes[0]
+            .childNodes[0]
+    const indexOfDoneTask = newCollection.findIndex(
         (object) => object.title === taskTitleDone
     )
-    if (collection[indexOfDoneTask].completed === false) {
-        collection[indexOfDoneTask].completed = true
-        // strikeTask(indexOfDoneTask)
+    if (newCollection[indexOfDoneTask].completed === false) {
+        newCollection[indexOfDoneTask].completed = true
     } else {
-        collection[indexOfDoneTask].completed = false
-        // unStrikeTask(indexOfDoneTask)
+        newCollection[indexOfDoneTask].completed = false
     }
-    localStorage.setItem('ToDoList', JSON.stringify(collection))
-    window.location.reload()
+    localStorage.setItem('ToDoList', JSON.stringify(newCollection))
+    if (
+        e.target.parentElement.innerHTML ===
+        '<img src="images/pending.png" class="btnCard done">'
+    ) {
+        e.target.parentElement.innerHTML =
+            '<img src="images/check.png" class="btnCard done">'
+        test.classList.add('strike')
+        test.nextSibling.classList.add('strike')
+    } else {
+        e.target.parentElement.innerHTML =
+            '<img src="images/pending.png" class="btnCard done">'
+        test.classList.remove('strike')
+        test.nextSibling.classList.remove('strike')
+    }
+    e.stopPropagation()
 }
 export default taskDone

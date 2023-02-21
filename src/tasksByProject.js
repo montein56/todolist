@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 
-import { createCard } from './makeScreen'
+import createCard from './makeScreen'
 // CREATE LIST OF TASKS BY PROJECT
 function projectTaskList(e) {
     const collection = JSON.parse(window.localStorage.getItem('ToDoList'))
@@ -8,36 +8,40 @@ function projectTaskList(e) {
     const newCollection = collection.filter(
         (item) => item.project === e.target.innerHTML
     )
+    const navSubMenu = document.querySelector('#navSubMenu')
+    const subMenuUL = document.querySelector('#subMenuUL')
+
+    navSubMenu.style.visibility = 'hidden'
+    subMenuUL.innerHTML = ''
+    createCard(newCollection)
+}
+function getUniqueProjectNames() {
+    // CREATE DROPDOWN- LIST OF UNIQUE PROJECTS
+    const navSubMenuPara = document.querySelector('#subMenuTitle')
+    navSubMenuPara.innerText = 'PROJECTS:'
+    const subMenuUL = document.querySelector('#subMenuUL')
+    const navSubMenu = document.getElementById('navSubMenu')
     const main = document.getElementById('main')
     main.innerHTML = ''
-    createCard(newCollection, main)
-}
-function projectList() {
-    // CREATE DROPDOWN- LIST OF UNIQUE PROJECTS
-    const navSubMenu = document.getElementById('navSubMenu')
-    navSubMenu.innerHTML = ''
-    const br = document.createElement('br')
-    const menuHeader = document.createElement('p')
-    menuHeader.innerHTML = '<b>PROJECTS:</b>'
-    navSubMenu.appendChild(menuHeader)
-    navSubMenu.appendChild(br.cloneNode())
 
     const collection = JSON.parse(window.localStorage.getItem('ToDoList'))
     const arrProjectNames = [...new Set(collection.map((item) => item.project))] // ARRAY OF PROJECT NAMES
-    if (arrProjectNames.length > 6) {
-        alert('Too Many Projects to display all')
-    }
-    // arrProjectNames.unshift(menuHeader)
+    arrProjectNames.sort((a, b) => (a > b ? 1 : -1))
+
+    // if (arrProjectNames.length > 4) {
+    //     alert('Too Many Projects to display all')
+    // }
 
     let i = 0
     // eslint-disable-next-line no-plusplus
     for (i = 0; i <= arrProjectNames.length - 1; i++) {
-        const projectName = document.createElement('a')
-        projectName.innerHTML = `${arrProjectNames[i]}`
-        navSubMenu.appendChild(projectName)
-        navSubMenu.appendChild(br.cloneNode())
-        navSubMenu.appendChild(br.cloneNode())
-        projectName.addEventListener('click', projectTaskList)
+        const li = document.createElement('li')
+        li.classList.add('options')
+        li.innerHTML = `${arrProjectNames[i]}`
+        li.addEventListener('click', projectTaskList)
+        subMenuUL.appendChild(li)
     }
+    // const navSubMenu = document.querySelector('#navSubMenu')
+    navSubMenu.style.visibility = 'visible'
 }
-export default projectList
+export default getUniqueProjectNames
