@@ -5,6 +5,8 @@ import {
     applyCalendarListeners,
     applyCardBtnListeners,
     applyNavListeners,
+    applyCalendarAdvanceListener,
+    applyCalendarRetardListener,
 } from './listenerBranch'
 import createCard from './makeScreen'
 import { taskFactory } from './taskNewEditSave'
@@ -29,9 +31,11 @@ function initLocalStorage() {
         localStorage.setItem('ToDoList', JSON.stringify(listFromLS))
     }
     createCard()
-    makeCalendar()
+    makeCalendar(0)
     applyNavListeners()
     applyCalendarListeners()
     applyCardBtnListeners()
+    applyCalendarAdvanceListener()
+    applyCalendarRetardListener()
 }
 export default initLocalStorage
