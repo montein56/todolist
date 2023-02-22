@@ -11,8 +11,6 @@ function taskDelete(e) {
     )
     if (collection.length <= 1) {
         alert('This is the last task - DO NOT TRY TO DELETE')
-
-        // window.location.reload()
     } else {
         // eslint-disable-next-line no-restricted-globals
         const response = confirm('The deletion will be final: PROCEED?')

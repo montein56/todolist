@@ -2,14 +2,14 @@
 
 function taskDone(e) {
     const newCollection = JSON.parse(window.localStorage.getItem('ToDoList'))
-    const taskTitleDone =
+    const titleOfTaskToChangeDone =
         e.target.parentElement.parentElement.parentElement.childNodes[0]
             .childNodes[0].firstChild.data
-    const test =
+    const getNodeToChange =
         e.target.parentElement.parentElement.parentElement.childNodes[0]
             .childNodes[0]
     const indexOfDoneTask = newCollection.findIndex(
-        (object) => object.title === taskTitleDone
+        (object) => object.title === titleOfTaskToChangeDone
     )
     if (newCollection[indexOfDoneTask].completed === false) {
         newCollection[indexOfDoneTask].completed = true
@@ -23,13 +23,13 @@ function taskDone(e) {
     ) {
         e.target.parentElement.innerHTML =
             '<img src="images/check.png" class="btnCard done">'
-        test.classList.add('strike')
-        test.nextSibling.classList.add('strike')
+        getNodeToChange.classList.add('strike')
+        getNodeToChange.nextSibling.classList.add('strike')
     } else {
         e.target.parentElement.innerHTML =
             '<img src="images/pending.png" class="btnCard done">'
-        test.classList.remove('strike')
-        test.nextSibling.classList.remove('strike')
+        getNodeToChange.classList.remove('strike')
+        getNodeToChange.nextSibling.classList.remove('strike')
     }
     e.stopPropagation()
 }

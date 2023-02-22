@@ -25,12 +25,8 @@ function getUniqueProjectNames() {
     main.innerHTML = ''
 
     const collection = JSON.parse(window.localStorage.getItem('ToDoList'))
-    const arrProjectNames = [...new Set(collection.map((item) => item.project))] // ARRAY OF PROJECT NAMES
+    const arrProjectNames = [...new Set(collection.map((item) => item.project))] // ARRAY OF UNIQUE PROJECT NAMES
     arrProjectNames.sort((a, b) => (a > b ? 1 : -1))
-
-    // if (arrProjectNames.length > 4) {
-    //     alert('Too Many Projects to display all')
-    // }
 
     let i = 0
     // eslint-disable-next-line no-plusplus
@@ -41,7 +37,6 @@ function getUniqueProjectNames() {
         li.addEventListener('click', projectTaskList)
         subMenuUL.appendChild(li)
     }
-    // const navSubMenu = document.querySelector('#navSubMenu')
     navSubMenu.style.visibility = 'visible'
 }
 export default getUniqueProjectNames

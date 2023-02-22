@@ -1,16 +1,11 @@
 /* eslint-disable no-plusplus */
 import { addDays, format } from 'date-fns'
 
-function makeCalendar() {
+function makeCalendar(changedDate) {
     // MAKE CALENDAR BAR BELOW HEADER
-    // const header = document.getElementById('header')
-    // const calendarBar = document.getElementById('calendar')
-    // header.insertAdjacentElement('afterend', calendarBar)
-    // const content = document.getElementById('content')
-    // content.style.gridTemplateAreas =
-    //     '"header header" "footer calendarBar" "footer main"'
 
-    const date = new Date()
+    const date = changedDate || new Date()
+
     const cards = document.getElementsByClassName('cardDay')
     let x = 0
     for (x = 0; x <= cards.length - 1; x++) {
@@ -22,7 +17,7 @@ function makeCalendar() {
         cards[x].innerText = format(dateToUse, 'EEE')
         cards[x].appendChild(paraDay)
         cards[x].appendChild(tasksToday)
-        paraDay.innerText = format(dateToUse, 'dd MMM')
+        paraDay.innerText = format(dateToUse, 'dd MMM yy')
 
         const dateForTasks = format(addDays(date, x), 'yyyy-MM-dd')
         const collection = JSON.parse(window.localStorage.getItem('ToDoList'))
