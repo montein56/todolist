@@ -1,5 +1,4 @@
-/* eslint-disable no-alert */
-
+/* eslint-disable no-plusplus */
 import createCard from './makeScreen'
 // CREATE LIST OF TASKS BY PROJECT
 function projectTaskList(e) {
@@ -29,7 +28,6 @@ function getUniqueProjectNames() {
     arrProjectNames.sort((a, b) => (a > b ? 1 : -1))
 
     let i = 0
-    // eslint-disable-next-line no-plusplus
     for (i = 0; i <= arrProjectNames.length - 1; i++) {
         const li = document.createElement('li')
         li.classList.add('options')

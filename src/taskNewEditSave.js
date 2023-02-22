@@ -74,7 +74,10 @@ function saveNewTask(editIndex) {
         }
         default:
     }
-    const project = document.getElementById('project').value
+    let project = document.getElementById('project').value
+    if (!project) {
+        project = 'Unknown'
+    }
     const deadline = document.getElementById('deadline').value
 
     const newTask = taskFactory(
@@ -98,4 +101,4 @@ function resetForm(e) {
     }
 }
 export { addTaskToLocalStorage, taskFactory, resetForm, saveNewTask }
-export default saveNewTask
+// export default saveNewTask

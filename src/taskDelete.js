@@ -5,21 +5,20 @@ function taskDelete(e) {
         e.target.parentElement.parentElement.parentElement.childNodes[0]
             .childNodes[0].firstChild.data
 
-    const collection = JSON.parse(window.localStorage.getItem('ToDoList'))
-    const indexToDelete = collection.findIndex(
+    const newCollection = JSON.parse(window.localStorage.getItem('ToDoList'))
+    const indexToDelete = newCollection.findIndex(
         (object) => object.title === targetID
     )
-    if (collection.length <= 1) {
+    if (newCollection.length <= 1) {
         alert('This is the last task - DO NOT TRY TO DELETE')
     } else {
         // eslint-disable-next-line no-restricted-globals
         const response = confirm('The deletion will be final: PROCEED?')
         if (response) {
-            collection.splice(indexToDelete, 1)
-            localStorage.setItem('ToDoList', JSON.stringify(collection))
-            window.location.reload()
-        } else {
-            window.location.reload()
+            newCollection.splice(indexToDelete, 1)
+            localStorage.setItem('ToDoList', JSON.stringify(newCollection))
+
+            e.target.parentElement.parentElement.parentElement.innerHTML = ''
         }
     }
 }

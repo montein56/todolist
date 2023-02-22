@@ -3,7 +3,6 @@
 import makeCalendar from './calendar'
 import {
     applyCalendarListeners,
-    applyCardBtnListeners,
     applyNavListeners,
     applyCalendarAdvanceListener,
     applyCalendarRetardListener,
@@ -34,7 +33,6 @@ function initLocalStorage() {
     makeCalendar(0)
     applyNavListeners()
     applyCalendarListeners()
-    applyCardBtnListeners()
     applyCalendarAdvanceListener()
     applyCalendarRetardListener()
 }

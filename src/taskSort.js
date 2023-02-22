@@ -1,5 +1,4 @@
 /* eslint-disable no-plusplus */
-/* eslint-disable no-undef */
 /* eslint-disable no-alert */
 
 import createCard from './makeScreen'
@@ -22,7 +21,6 @@ function sortBy(e) {
     localStorage.setItem('ToDoList', JSON.stringify(collection))
     const navSubMenu = document.querySelector('#navSubMenu')
     navSubMenu.style.visibility = 'hidden'
-    subMenuUL.innerHTML = ''
     createCard()
 }
 

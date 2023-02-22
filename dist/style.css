@@ -180,7 +180,7 @@ ul {
     position: fixed;
     bottom: 20vh;
     left: 7vw;
-    font-size: 1.5vw;
+    font-size: 2.5vw;
 }
 #formAdd span {
     display: flex;
@@ -267,8 +267,9 @@ ul {
         font-size: 2vw;
     }
     #formAdd {
-        width: 50vw;
-        left: 30vw;
+        width: 70vw;
+        left: 20vw;
+        font-size: 2vw;
     }
     #navSubMenu {
         display: block;
@@ -359,5 +360,9 @@ ul {
 @media only screen and (min-width: 1200px) {
     body {
         font-size: 1vw;
+    }
+    #formAdd {
+        font-size: 1.5vw;
+        width: 50%;
     }
 }

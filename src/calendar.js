@@ -3,9 +3,6 @@ import { addDays, format } from 'date-fns'
 
 function makeCalendar(changedDate) {
     // MAKE CALENDAR BAR BELOW HEADER
-
-    const date = changedDate || new Date()
-
     const cards = document.getElementsByClassName('cardDay')
     let x = 0
     for (x = 0; x <= cards.length - 1; x++) {
@@ -13,6 +10,7 @@ function makeCalendar(changedDate) {
         paraDay.classList.add('paraDay')
         const tasksToday = document.createElement('p')
         tasksToday.classList.add('tasksToday')
+        const date = changedDate || new Date()
         const dateToUse = addDays(date, x)
         cards[x].innerText = format(dateToUse, 'EEE')
         cards[x].appendChild(paraDay)
@@ -26,7 +24,7 @@ function makeCalendar(changedDate) {
         )
         let i = 0
         for (i = 0; i <= arrTasksToday.length - 1; i++) {
-            tasksToday.innerHTML += `<br>${i + 1}. ${
+            tasksToday.innerHTML += `<br>${i + 1}: ${
                 arrTasksToday[i].title
             }<br>`
         }

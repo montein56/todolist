@@ -31,6 +31,6 @@ function taskDone(e) {
         getNodeToChange.classList.remove('strike')
         getNodeToChange.nextSibling.classList.remove('strike')
     }
-    e.stopPropagation()
+    // e.stopPropagation()
 }
 export default taskDone
