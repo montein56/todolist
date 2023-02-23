@@ -21,6 +21,8 @@ function sortBy(e) {
     localStorage.setItem('ToDoList', JSON.stringify(collection))
     const navSubMenu = document.querySelector('#navSubMenu')
     navSubMenu.style.visibility = 'hidden'
+    const subMenuUL = document.querySelector('#subMenuUL')
+    subMenuUL.innerText = ''
     createCard()
 }
 

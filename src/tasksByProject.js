@@ -9,7 +9,6 @@ function projectTaskList(e) {
     )
     const navSubMenu = document.querySelector('#navSubMenu')
     const subMenuUL = document.querySelector('#subMenuUL')
-
     navSubMenu.style.visibility = 'hidden'
     subMenuUL.innerHTML = ''
     createCard(newCollection)
